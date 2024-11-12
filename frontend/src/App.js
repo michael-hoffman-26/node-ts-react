@@ -1,6 +1,4 @@
-import logo from './logo.svg';
 import './App.css';
-import HealthCheckButton from './components/simple-button'
 import ItemList from './components/tasks'
 
 function App() {
