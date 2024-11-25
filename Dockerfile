@@ -11,6 +11,10 @@ ARG WORK_DIR
 WORKDIR $WORK_DIR
 ENV NODE_ENV=development
 COPY . .
+RUN cd frontend
+RUN npm ci 
+RUN npm run build
+RUN cd ../
 RUN npm ci
 RUN npm run build
 
@@ -30,6 +34,7 @@ WORKDIR $WORK_DIR
 EXPOSE 9090
 COPY --from=build-sources --chown=node:node $WORK_DIR/$BUILD_FOLDER ./$BUILD_FOLDER
 COPY --from=build-sources --chown=node:node $WORK_DIR/.env ./
+COPY --from=build-sources --chown=node:node $WORK_DIR/frontend/build ./frontend/build
 COPY --from=setup-project --chown=node:node $WORK_DIR/package*.json ./
 COPY --from=setup-project --chown=node:node $WORK_DIR/node_modules ./node_modules
 CMD npm run start:prod
