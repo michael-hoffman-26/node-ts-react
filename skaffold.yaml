@@ -1,0 +1,19 @@
+apiVersion: skaffold/v4beta11
+kind: Config
+metadata:
+  name: node-ts-react
+build:
+  local:
+    concurrency: 1
+    tryImportMissing: true
+    useDockerCLI: true
+  artifacts:
+    - image: us-east1-docker.pkg.dev/potent-trail-329612/basic-repo/fullstack-task
+      docker:
+        dockerfile: Dockerfile
+  tagPolicy:
+    gitCommit: {}
+manifests:
+  rawYaml:
+    - CD/k8s/deployment.yaml
+    - CD/k8s/service.yaml

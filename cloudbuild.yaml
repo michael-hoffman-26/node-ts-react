@@ -1,0 +1,30 @@
+steps:
+  # build the container image
+- name: "gcr.io/cloud-builders/docker"
+  # todo: check how to create dynamic tags for the repo
+  args: ["build", "-t", "us-east1-docker.pkg.dev/potent-trail-329612/basic-repo/fulstack-task:latest", "."]
+  # push container image
+- name: "gcr.io/cloud-builders/docker"
+  args: ["push", "us-east1-docker.pkg.dev/potent-trail-329612/basic-repo/fulstack-task:latest"]
+
+# todo 
+# create pipline
+# create target
+# create release
+
+- name: 'google/cloud-sdk:latest'
+  id: ''
+  entrypoint: 'sh'
+  args:
+  - -xe
+  - -c
+  - |
+    gcloud deploy apply --file CD/google-deploy/pipeline.yaml --region=us-central1
+    gcloud deploy apply --file CD/google-deploy/dev.yaml --region=us-central1
+    gcloud deploy releases create 'fullstack-task-release-001' --delivery-pipeline=gke-cicd-pipeline --region=us-central1 --skaffold-file=skaffold.yaml
+
+# skaffold build --interactive=false \
+# --default-repo us-east1-docker.pkg.dev/potent-trail-329612/basic-repo \
+# --file-output artifacts.json
+
+# gcloud deploy releases create 'fullstack-task-release-001' --delivery-pipeline=gke-cicd-pipeline --region=us-central1 --skaffold-file=skaffold.yaml --build-artifacts=./artifacts.json

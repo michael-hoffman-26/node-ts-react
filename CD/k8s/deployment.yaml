@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fullstack-task-deployment
+  labels:
+    app: fullstack-task
+spec:
+  replicas: 1  # Number of Pods to run
+  selector:
+    matchLabels:
+      app: fullstack-task
+  template:
+    metadata:
+      labels:
+        app: fullstack-task
+    spec:
+      containers:
+      - name: fullstack-task
+        image: us-east1-docker.pkg.dev/potent-trail-329612/basic-repo/fullstack-task:v0.0.1
+        imagePullPolicy: IfNotPresent  
+        ports:
+        - containerPort: 9090  # Exposed port inside the container
+        # resources:  # Optional: Define resource limits and requests
+        #   limits:
+        #     memory: "512Mi"
+        #     cpu: "500m"
+        #   requests:
+        #     memory: "256Mi"
+        #     cpu: "250m"
