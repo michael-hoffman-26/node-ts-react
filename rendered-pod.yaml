@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: fullstack-task
+  name: fullstack-task-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fullstack-task
+  template:
+    metadata:
+      labels:
+        app: fullstack-task
+    spec:
+      containers:
+        - image: us-east1-docker.pkg.dev/potent-trail-329612/basic-repo/fullstack-task:b338aff@sha256:7a71e2522aeebe6bdaaab1f1682ac58ae8253ea499add9718dec749f880840cd
+          imagePullPolicy: IfNotPresent
+          name: fullstack-task
+          ports:
+            - containerPort: 9090
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fullstack-task-service
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 9090
+  selector:
+    app: fullstack-task
+  type: LoadBalancer
