@@ -14,5 +14,5 @@
     "node": true
   },
   "rules": {},
-  "ignorePatterns": ["build/"]
+  "ignorePatterns": ["build/", "frontend/"]
 }

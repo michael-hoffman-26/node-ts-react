@@ -9,7 +9,7 @@
     "start": "ts-node backend/index.ts",
     "build": "rimraf ./build && tsc",
     "start:prod": "node build/index.js",
-    "test": "npm run lint && npm run test:unit",
+    "test": "npm run lint && npm run test:unit && npm run test:integration",
     "test:unit": "jest --config jest.unit.config.js",
     "test:integration": "jest --config jest.integration.config.js",
     "lint": "eslint .",
