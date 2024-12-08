@@ -1,5 +1,5 @@
 # Fullstack main repo server
-Items list fullstack repo
+Tasks list fullstack repo
 
 ## Local Installation
 
@@ -26,8 +26,6 @@ npm run start:dev
 
 ## Attention some extra notes
 * Not all packages are used right now, there are some packges that we can delete
-* The dockerfile is not updated as well.
 * Ihave choosed to implement a simple In memory cache, so it would be easier and fast to create this project
-* I need to refacto and use consits names for tasks, some times i have used items instead of tasks
-* todo add jest testing for FE and BE
+* todo add jest testing for BE
 * todo update the css

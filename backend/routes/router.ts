@@ -1,12 +1,12 @@
 import express from 'express';
 
-import itemRouter from './item';
+import taskRouter from './task';
 import healthRouter from './health';
 
 
 const router = express.Router();
 
-router.use("/item", itemRouter);
+router.use("/task", taskRouter);
 router.use('/health', healthRouter);
 
 export default router;

@@ -1,15 +1,15 @@
 import express from 'express'
 
 import { validateRequest } from '../../validator/validator';
-import { deleteItemValidator, postItemValidator, } from './validators';
-import { createItem, deleteItem, getItems } from '../../controller/items';
+import { deleteTaskValidator, postTaskValidator, } from './validators';
+import { createTask, deleteItem, getItems } from '../../controller/items';
 
 const router = express.Router();
 
 router.post('',
-    postItemValidator,
+    postTaskValidator,
     validateRequest,
-    createItem
+    createTask
 );
 
 router.get('',
@@ -17,7 +17,7 @@ router.get('',
 );
 
 router.delete('/:id',
-    deleteItemValidator,
+    deleteTaskValidator,
     validateRequest,
     deleteItem
 );

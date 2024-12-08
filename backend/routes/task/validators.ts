@@ -1,13 +1,13 @@
 import { body, ValidationChain, param } from 'express-validator';
 
-export const postItemValidator: ValidationChain[] = [
+export const postTaskValidator: ValidationChain[] = [
     body('name').exists().trim().isString().notEmpty(),
 ];
 
 
-export const deleteItemValidator: ValidationChain[] = [
+export const deleteTaskValidator: ValidationChain[] = [
     param('id')
         .exists().withMessage('ID parameter is required')
-        .isInt().withMessage('ID must be a number') 
+        .isInt().withMessage('ID must be a number')
         .notEmpty().withMessage('ID cannot be empty')
 ];

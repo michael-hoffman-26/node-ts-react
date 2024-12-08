@@ -3,8 +3,6 @@ ARG NODE_IMAGE=node:$NODE_VERSION_TAG
 ARG BUILD_FOLDER=/build
 ARG WORK_DIR=/backend
 
-# todo add dupport for frontend project
-
 
 FROM $NODE_IMAGE as build-sources
 ARG WORK_DIR
