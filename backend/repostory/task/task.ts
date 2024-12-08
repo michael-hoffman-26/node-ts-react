@@ -1,5 +1,5 @@
-import { TaskNotExists } from "../errors/TakNotExists";
-import { TaskData } from "../models/task";
+import { TaskNotExists } from "../../errors/TakNotExists";
+import { TaskData } from "../../models/task";
 
 export interface TaskRepository {
     createTask(data: TaskData): Promise<TaskData>;
@@ -15,7 +15,7 @@ export class InMemoryTaskRepository implements TaskRepository {
     async createTask(data: TaskData): Promise<TaskData> {
         const newTask: TaskData = { id: this.nextId++, name: data.name };
         this.tasks.push(newTask);
-        
+
         return newTask;
     }
 
@@ -27,7 +27,7 @@ export class InMemoryTaskRepository implements TaskRepository {
     async deleteTask(id: number): Promise<void> {
         const beforeLentgh = this.tasks.length
         this.tasks = this.tasks.filter(item => item.id !== id);
-        
+
 
         if (beforeLentgh === this.tasks.length) {
             throw new TaskNotExists(id)

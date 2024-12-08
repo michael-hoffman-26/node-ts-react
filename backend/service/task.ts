@@ -1,5 +1,5 @@
 import { TaskData } from '../models/task';
-import { TaskRepository } from '../repostory/task';
+import { TaskRepository } from '../repostory/task/task';
 
 export class TaskService {
     private repositoryClient: TaskRepository;
