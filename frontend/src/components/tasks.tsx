@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { addItem, deleteItem, fetchItems } from '../api/item';
+import { addTask, deleteTask, fetchTasks } from '../api/tasks';
+import { Task } from '../types/task';
 
-interface Item {
-    id: number;
-    name: string;
-}
 
-const ItemList: React.FC = () => {
-    const [items, setItems] = useState<Item[]>([]);
+
+const TaskList: React.FC = () => {
+    const [tasks, setTasks] = useState<Task[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [newTask, setNewTask] = useState<string>('');
 
-    const loadItems = async () => {
+    const loadTasks = async () => {
         try {
-            const data = await fetchItems();
-            setItems(data);
+            const data = await fetchTasks();
+            setTasks(data);
         } catch (error) {
             console.error(error);
         } finally {
@@ -23,13 +21,13 @@ const ItemList: React.FC = () => {
     };
 
     useEffect(() => {
-        loadItems();
+        loadTasks();
     }, []);
 
-    const handleDeleteItem = async (id: number) => {
+    const handleDeleteTask = async (id: number) => {
         try {
-            await deleteItem(id);
-            setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+            await deleteTask(id);
+            setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
         } catch (error) {
             console.error(error);
         }
@@ -38,8 +36,8 @@ const ItemList: React.FC = () => {
     const handleAddTask = async () => {
         if (newTask.trim()) {
             try {
-                const newItemData = await addItem(newTask);
-                setItems([...items, newItemData]); 
+                const newTaskData = await addTask(newTask);
+                setTasks([...tasks, newTaskData]);
                 setNewTask('');
             } catch (error) {
                 console.error('Error adding task:', error);
@@ -61,10 +59,10 @@ const ItemList: React.FC = () => {
             <button onClick={handleAddTask}>Add</button>
 
             <ul>
-                {items.map((item) => (
-                    <li key={item.id}>
-                        {item.name}{' '}
-                        <button onClick={() => handleDeleteItem(item.id)}>Delete</button>
+                {tasks.map((task) => (
+                    <li key={task.id}>
+                        {task.name}{' '}
+                        <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
                     </li>
                 ))}
             </ul>
@@ -72,4 +70,4 @@ const ItemList: React.FC = () => {
     );
 };
 
-export default ItemList;
+export default TaskList;
