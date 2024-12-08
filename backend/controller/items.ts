@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { StatusCodes } from 'http-status-codes';
 
 import { TaskService } from '../service/task';
-import { createTaskRepo } from '../repostory/repostory-factory';
+import { createTaskRepo } from '../repostory/task/repostory-factory';
 
 const taskClient = createTaskRepo();
 const taskService = new TaskService(taskClient);

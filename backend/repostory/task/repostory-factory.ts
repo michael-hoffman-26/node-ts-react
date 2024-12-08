@@ -1,5 +1,5 @@
 import { InMemoryTaskRepository, TaskRepository } from './task';
-import { CURRENT_TASK_REPO } from '../utils/consts';
+import { CURRENT_TASK_REPO } from '../../utils/consts';
 
 /**
  * I have choosed to implement a simple In memory cache
