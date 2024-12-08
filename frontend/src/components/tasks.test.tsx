@@ -1,12 +1,12 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import ItemList from "./tasks";
-import { fetchItems, addItem, deleteItem } from "../api/item";
+import { fetchTasks, addTask, deleteTask } from "../api/tasks";
 
 // Mock the API methods
-jest.mock("../api/item", () => ({
-    fetchItems: jest.fn(),
-    addItem: jest.fn(),
-    deleteItem: jest.fn(),
+jest.mock("../api/tasks", () => ({
+    fetchTasks: jest.fn(),
+    addTask: jest.fn(),
+    deleteTask: jest.fn(),
 }));
 
 describe("ItemList Component", () => {
@@ -25,7 +25,7 @@ describe("ItemList Component", () => {
             { id: 1, name: "Task 1" },
             { id: 2, name: "Task 2" },
         ];
-        (fetchItems as jest.Mock).mockResolvedValueOnce(mockItems);
+        (fetchTasks as jest.Mock).mockResolvedValueOnce(mockItems);
 
         render(<ItemList />);
         await waitFor(() => expect(screen.getByText(mockItems[0].name)).toBeInTheDocument());
@@ -34,8 +34,8 @@ describe("ItemList Component", () => {
 
     test("adds a new task", async () => {
         const mockNewTaskName: string = "New Task";
-        (fetchItems as jest.Mock).mockResolvedValueOnce([]);
-        (addItem as jest.Mock).mockResolvedValueOnce({ id: 3, name: mockNewTaskName });
+        (fetchTasks as jest.Mock).mockResolvedValueOnce([]);
+        (addTask as jest.Mock).mockResolvedValueOnce({ id: 3, name: mockNewTaskName });
 
         render(<ItemList />);
 
@@ -55,8 +55,8 @@ describe("ItemList Component", () => {
             { id: 1, name: "Task 1" },
             { id: 2, name: "Task 2" },
         ];
-        (fetchItems as jest.Mock).mockResolvedValueOnce(mockItems);
-        (deleteItem as jest.Mock).mockResolvedValueOnce({});
+        (fetchTasks as jest.Mock).mockResolvedValueOnce(mockItems);
+        (deleteTask as jest.Mock).mockResolvedValueOnce({});
 
         render(<ItemList />);
 
@@ -70,9 +70,9 @@ describe("ItemList Component", () => {
         );
     });
 
-    
+
     test("handles fetch errors gracefully", async () => {
-        (fetchItems as jest.Mock).mockRejectedValueOnce(new Error("Failed to fetch"));
+        (fetchTasks as jest.Mock).mockRejectedValueOnce(new Error("Failed to fetch"));
         render(<ItemList />);
         await waitFor(() => expect(screen.queryByText("Task List")).toBeInTheDocument());
     });
