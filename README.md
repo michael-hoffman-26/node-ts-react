@@ -27,5 +27,4 @@ npm run start:dev
 ## Attention some extra notes
 * Not all packages are used right now, there are some packges that we can delete
 * Ihave choosed to implement a simple In memory cache, so it would be easier and fast to create this project
-* todo add jest testing for BE
 * todo update the css
